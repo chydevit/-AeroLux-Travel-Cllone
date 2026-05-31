@@ -134,11 +134,9 @@ export default function Header() {
                     <Link
                       href={l.href}
                       className={`flex h-12 items-center whitespace-nowrap px-3 text-[13px] font-semibold uppercase tracking-wide transition ${
-                        l.label === "Gift Vouchers"
-                          ? "text-gold hover:bg-white/10"
-                          : active
-                            ? "bg-white/10 text-gold"
-                            : "text-white/80 hover:bg-white/10 hover:text-white"
+                        active
+                          ? "bg-white/10 text-gold"
+                          : "text-white/80 hover:bg-white/10 hover:text-white"
                       }`}
                     >
                       {t(l.label)}

@@ -27,7 +27,10 @@ export default function OffersPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy">
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy to-navy-800" />
+        <video className="absolute inset-0 h-full w-full object-cover" autoPlay loop muted playsInline>
+          <source src="/offers-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 via-navy/70 to-navy-800/85" />
         <div className="absolute -left-32 top-[-20%] h-80 w-80 rounded-full bg-gold/10 blur-3xl" />
         <div className="container-x relative z-10 flex justify-center py-20 sm:py-28">
           <div className="max-w-xl border-2 border-gold/60 bg-navy-900/30 px-8 py-12 text-center backdrop-blur-sm sm:px-14">
