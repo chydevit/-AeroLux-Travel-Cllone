@@ -14,7 +14,7 @@ const palettes = {
 function GiftCard({ tier, className = "" }) {
   return (
     <div
-      className={`relative h-28 w-44 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br ${palettes[tier]} shadow-lift ring-1 ring-black/10 ${className}`}
+      className={`relative h-24 w-36 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br ${palettes[tier]} shadow-lift ring-1 ring-black/10 sm:h-28 sm:w-44 ${className}`}
     >
       <div className="absolute -inset-y-2 left-1/3 w-1/3 rotate-12 bg-white/20 blur-md" />
       <div className="relative flex h-full flex-col justify-between p-4">
@@ -29,7 +29,7 @@ function GiftCard({ tier, className = "" }) {
 
 function GiftCardFan() {
   return (
-    <div className="flex items-center justify-center py-4">
+    <div className="flex items-center justify-center overflow-hidden py-4">
       <GiftCard tier="silver" className="translate-x-7 translate-y-3 rotate-[-8deg]" />
       <GiftCard tier="onyx" className="relative z-10 scale-110" />
       <GiftCard tier="gold" className="-translate-x-7 translate-y-3 rotate-[8deg]" />

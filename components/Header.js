@@ -69,7 +69,7 @@ export default function Header() {
               </button>
               {langOpen && (
                 <ul className="absolute right-0 mt-1 w-24 overflow-hidden rounded-md border border-navy/10 bg-white shadow-card">
-                  {["ENG", "ESP", "FRA"].map((o) => (
+                  {["ENG", "ESP", "FRA", "KHM"].map((o) => (
                     <li key={o}>
                       <button
                         onClick={() => { setLang(o); setLangOpen(false); }}
