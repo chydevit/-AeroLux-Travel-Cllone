@@ -1,4 +1,5 @@
 import "./globals.css";
+import { LanguageProvider } from "../components/LanguageProvider";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CallbackButton from "../components/CallbackButton";
@@ -25,18 +26,20 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Noto+Sans+Khmer:wght@100..900&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <CallbackButton />
-        <QuoteModal />
-        <CallbackModal />
-        <ScrollReveal />
+        <LanguageProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <CallbackButton />
+          <QuoteModal />
+          <CallbackModal />
+          <ScrollReveal />
+        </LanguageProvider>
       </body>
     </html>
   );

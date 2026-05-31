@@ -1,16 +1,19 @@
+"use client";
+
 import { services } from "../lib/data";
 import { Check } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Services() {
+  const { t } = useLanguage();
   return (
     <section className="bg-white py-16 sm:py-24">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow mb-3">What We Do</p>
-          <h2 className="section-title">AeroLux Travel Services</h2>
+          <p className="eyebrow mb-3">{t("What We Do")}</p>
+          <h2 className="section-title">{t("AeroLux Travel Services")}</h2>
           <p className="mt-4 text-ink/65">
-            One dedicated expert, end to end — handling everything that turns a flight
-            into a genuinely premium experience.
+            {t("One dedicated expert, end to end — handling everything that turns a flight into a genuinely premium experience.")}
           </p>
         </div>
 
@@ -29,8 +32,8 @@ export default function Services() {
                 </span>
               </div>
               <div>
-                <h3 className="font-serif text-xl font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/65">{s.body}</p>
+                <h3 className="font-serif text-xl font-bold text-navy">{t(s.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">{t(s.body)}</p>
               </div>
             </div>
           ))}

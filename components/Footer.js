@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { footerColumns, slugify } from "../lib/data";
 import { Phone } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer id="footer" className="bg-navy-900 text-white/70">
       <div className="container-x py-16">
@@ -18,8 +22,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
-              Privately negotiated business and first class airfares, planned by a
-              dedicated expert — not a booking engine.
+              {t("Privately negotiated business and first class airfares, planned by a dedicated expert — not a booking engine.")}
             </p>
             <a
               href="tel:+18555550199"
@@ -38,7 +41,7 @@ export default function Footer() {
             return (
               <div key={title}>
                 <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-gold">
-                  {title}
+                  {t(title)}
                 </h4>
                 <ul className="mt-4 space-y-2.5">
                   {links.map((l) => (
@@ -69,12 +72,12 @@ export default function Footer() {
               ["Contact", "/contact"],
             ].map(([label, href]) => (
               <li key={label}>
-                <Link href={href} className="text-white/60 hover:text-gold">{label}</Link>
+                <Link href={href} className="text-white/60 hover:text-gold">{t(label)}</Link>
               </li>
             ))}
           </ul>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-white/45">We accept</span>
+            <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-white/45">{t("We accept")}</span>
             {["VISA", "Mastercard", "AMEX", "Discover"].map((p) => (
               <span key={p} className="rounded bg-white px-2.5 py-1 text-[11px] font-bold text-navy">{p}</span>
             ))}
@@ -84,10 +87,10 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/45 sm:flex-row">
-          <p>© {new Date().getFullYear()} AeroLux Travel. Original demo project — not affiliated with any real travel brand; all fares and reviews are fictional.</p>
+          <p>© {new Date().getFullYear()} AeroLux Travel. {t("Original demo project — not affiliated with any real travel brand; all fares and reviews are fictional.")}</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white">Terms of Use</Link>
+            <Link href="/privacy" className="hover:text-white">{t("Privacy Policy")}</Link>
+            <Link href="/terms" className="hover:text-white">{t("Terms of Use")}</Link>
           </div>
         </div>
       </div>

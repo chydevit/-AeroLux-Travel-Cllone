@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plane, Swap, Calendar, Chevron, Users } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 const TRIP_TYPES = ["Round-Trip", "One-Way", "Multi-City"];
 const CABINS = ["Business Class", "First Class", "Premium Economy"];
@@ -18,6 +19,7 @@ function Field({ label, children }) {
 }
 
 export default function SearchForm() {
+  const { t } = useLanguage();
   const [trip, setTrip] = useState("Round-Trip");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -41,16 +43,16 @@ export default function SearchForm() {
     >
       {/* Trip type tabs */}
       <div className="mb-4 inline-flex rounded-full bg-mist p-1">
-        {TRIP_TYPES.map((t) => (
+        {TRIP_TYPES.map((tt) => (
           <button
-            key={t}
+            key={tt}
             type="button"
-            onClick={() => setTrip(t)}
+            onClick={() => setTrip(tt)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-              trip === t ? "bg-navy text-white shadow" : "text-ink/60 hover:text-navy"
+              trip === tt ? "bg-navy text-white shadow" : "text-ink/60 hover:text-navy"
             }`}
           >
-            {t}
+            {t(tt)}
           </button>
         ))}
       </div>
@@ -58,11 +60,11 @@ export default function SearchForm() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
         {/* From / To */}
         <div className="flex flex-1 items-end gap-2">
-          <Field label="From">
+          <Field label={t("From")}>
             <input
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              placeholder="City or airport"
+              placeholder={t("City or airport")}
               className={inputCls}
             />
           </Field>
@@ -74,25 +76,25 @@ export default function SearchForm() {
           >
             <Swap className="h-4 w-4" />
           </button>
-          <Field label="To">
+          <Field label={t("To")}>
             <input
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              placeholder="City or airport"
+              placeholder={t("City or airport")}
               className={inputCls}
             />
           </Field>
         </div>
 
         {/* Dates */}
-        <Field label="Depart">
+        <Field label={t("Depart")}>
           <div className="relative">
             <input type="date" className={inputCls + " pr-9"} />
             <Calendar className="pointer-events-none absolute right-3 top-3 h-5 w-5 text-ink/40" />
           </div>
         </Field>
         {trip === "Round-Trip" && (
-          <Field label="Return">
+          <Field label={t("Return")}>
             <div className="relative">
               <input type="date" className={inputCls + " pr-9"} />
               <Calendar className="pointer-events-none absolute right-3 top-3 h-5 w-5 text-ink/40" />
@@ -103,7 +105,7 @@ export default function SearchForm() {
         {/* Passengers / Cabin */}
         <div className="relative flex-1">
           <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-ink/45">
-            Passengers / Cabin
+            {t("Passengers / Cabin")}
           </label>
           <button
             type="button"
@@ -112,14 +114,14 @@ export default function SearchForm() {
           >
             <span className="flex items-center gap-2 truncate">
               <Users className="h-4 w-4 text-ink/40" />
-              {pax} {pax > 1 ? "Passengers" : "Passenger"} · {cabin}
+              {pax} {t(pax > 1 ? "Passengers" : "Passenger")} · {t(cabin)}
             </span>
             <Chevron className="h-4 w-4 text-ink/40" />
           </button>
           {paxOpen && (
             <div className="absolute z-20 mt-2 w-full rounded-md border border-navy/10 bg-white p-4 shadow-card">
               <div className="mb-3 flex items-center justify-between">
-                <span className="text-sm font-medium text-navy">Passengers</span>
+                <span className="text-sm font-medium text-navy">{t("Passengers")}</span>
                 <div className="flex items-center gap-3">
                   <button type="button" onClick={() => setPax((p) => Math.max(1, p - 1))} className="grid h-7 w-7 place-items-center rounded-full border border-navy/20 text-navy">−</button>
                   <span className="w-5 text-center text-sm font-semibold">{pax}</span>
@@ -136,7 +138,7 @@ export default function SearchForm() {
                       cabin === c ? "bg-navy text-white" : "bg-mist text-ink/70 hover:text-navy"
                     }`}
                   >
-                    {c}
+                    {t(c)}
                   </button>
                 ))}
               </div>
@@ -147,10 +149,10 @@ export default function SearchForm() {
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <button type="submit" className="btn-gold flex-1 py-3.5 text-base">
-          <Plane className="h-5 w-5" /> Search Flights
+          <Plane className="h-5 w-5" /> {t("Search Flights")}
         </button>
         <a href="/how-to-book" className="btn-outline-gold flex-1 border-navy/15 py-3.5 text-navy hover:bg-navy hover:text-white">
-          How It Works
+          {t("How It Works")}
         </a>
       </div>
     </form>

@@ -1,9 +1,14 @@
+"use client";
+
 import SearchForm from "./SearchForm";
 import { airlines } from "../lib/data";
+import { useLanguage } from "./LanguageProvider";
 
 const badges = ["Accredited Agency", "A+ Accredited Business", "Trustpilot Excellent", "Live Concierge 24/7"];
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative overflow-hidden bg-navy">
       {/* Background video */}
@@ -39,13 +44,12 @@ export default function Hero() {
 
       <div className="container-x relative z-10 pb-14 pt-14 sm:pt-20">
         <div className="mx-auto max-w-3xl text-center text-white animate-fadeInUp">
-          <p className="eyebrow mb-3">Official Premium Airline Retailer</p>
+          <p className="eyebrow mb-3">{t("Official Premium Airline Retailer")}</p>
           <h1 className="font-serif text-4xl font-bold leading-[1.1] sm:text-5xl md:text-6xl">
-            Fly Business &amp; First Class <span className="text-gold">for Less</span>
+            {t("Fly Business & First Class")} <span className="text-gold">{t("for Less")}</span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/70 sm:text-lg">
-            Privately negotiated fares with 70+ world-class airlines, planned by a
-            dedicated travel expert — not a booking engine.
+            {t("Privately negotiated fares with 70+ world-class airlines, planned by a dedicated travel expert — not a booking engine.")}
           </p>
         </div>
 

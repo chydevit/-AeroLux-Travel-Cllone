@@ -5,10 +5,12 @@ import Link from "next/link";
 import { deals, slugify } from "../lib/data";
 import { Chevron } from "./icons";
 import CityArt from "./CityArt";
+import { useLanguage } from "./LanguageProvider";
 
-const badges = ["Hurry!", "Biz Class", "New", "1st Class"];
+const badges = ["Biz Class", "2-for-1", "30% Off", "1st Class"];
 
 export default function Deals() {
+  const { t } = useLanguage();
   const [pv, setPv] = useState(4);
   const [i, setI] = useState(0);
 
@@ -26,11 +28,10 @@ export default function Deals() {
     <section id="deals" className="bg-mist py-16 sm:py-24">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow mb-3">Best-Selling Deals</p>
-          <h2 className="section-title">Business Class Fares Our Clients Love</h2>
+          <p className="eyebrow mb-3">{t("Best-Selling Deals")}</p>
+          <h2 className="section-title">{t("Business Class Fares Our Clients Love")}</h2>
           <p className="mt-4 text-ink/65">
-            Save 30–70% off published fares on hand-picked premium routes. Prices are
-            per person, round-trip, and updated weekly.
+            {t("Save 30–70% off published fares on hand-picked premium routes. Prices are per person, round-trip, and updated weekly.")}
           </p>
         </div>
 
@@ -64,7 +65,7 @@ export default function Deals() {
                       <div className="absolute inset-0 opacity-20 [background:radial-gradient(circle_at_30%_20%,#fff,transparent_45%)]" />
                       <CityArt city={d.city} className="pointer-events-none absolute bottom-0 right-1 h-28 w-44 text-white/20" />
                       <span className="absolute left-3 top-3 grid h-14 w-14 place-items-center rounded-full bg-navy text-center text-[10px] font-bold uppercase leading-tight text-gold ring-2 ring-white/30">
-                        {badges[k % badges.length]}
+                        {t(badges[k % badges.length])}
                       </span>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3 className="font-serif text-2xl font-bold text-white">{d.city}</h3>
@@ -72,15 +73,12 @@ export default function Deals() {
                       </div>
                     </Link>
                     <div className="p-4">
-                      <h4 className="text-sm font-semibold text-navy">Business Class to {d.city}</h4>
+                      <h4 className="text-sm font-semibold text-navy">{t("Business Class to")} {d.city}</h4>
                       <div className="my-2 h-0.5 w-10 bg-red-500" />
-                      <div className="flex items-end gap-2">
-                        <span className="font-serif text-2xl font-bold text-navy">
-                          ${d.from.toLocaleString()}
-                          <span className="align-top text-sm">*</span>
-                        </span>
-                        <span className="mb-1 text-sm text-ink/40 line-through">${d.old.toLocaleString()}</span>
-                      </div>
+                      <span className="font-serif text-2xl font-bold text-navy">
+                        ${d.from.toLocaleString()}
+                        <span className="align-top text-sm">*</span>
+                      </span>
                     </div>
                   </article>
                 </div>
@@ -102,7 +100,7 @@ export default function Deals() {
 
         <div className="mt-8 text-center">
           <a href="/offers" className="btn-outline-gold border-navy/20 text-navy hover:bg-navy hover:text-white">
-            View All Deals
+            {t("View All Deals")}
           </a>
         </div>
       </div>

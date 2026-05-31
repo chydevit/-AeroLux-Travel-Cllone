@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plane, Close } from "../../components/icons";
+import { useLanguage } from "../../components/LanguageProvider";
 
 export default function MyTripsPage() {
+  const { t } = useLanguage();
   const [tab, setTab] = useState("email");
   const [value, setValue] = useState("");
   const [agree, setAgree] = useState(false);
@@ -27,7 +29,7 @@ export default function MyTripsPage() {
       {/* Close */}
       <Link
         href="/"
-        aria-label="Close"
+        aria-label={t("Close")}
         className="absolute right-5 top-5 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/85 text-ink shadow-card transition hover:bg-white"
       >
         <Close className="h-5 w-5" />
@@ -36,7 +38,7 @@ export default function MyTripsPage() {
       {/* Card */}
       <div className="relative flex min-h-full items-center justify-center p-4">
         <div className="w-full max-w-md rounded-2xl bg-white p-7 shadow-lift">
-          <h1 className="text-center font-sans text-2xl font-bold text-navy">My Bookings</h1>
+          <h1 className="text-center font-sans text-2xl font-bold text-navy">{t("My Bookings")}</h1>
 
           <div className="mt-5 grid grid-cols-2 rounded-lg bg-mist p-1 text-sm font-semibold">
             {[["email", "By Email"], ["ticket", "By Ticket Number"]].map(([k, label]) => (
@@ -46,7 +48,7 @@ export default function MyTripsPage() {
                 onClick={() => { setTab(k); setDone(false); }}
                 className={`rounded-md py-2 transition ${tab === k ? "bg-white text-navy shadow" : "text-ink/55"}`}
               >
-                {label}
+                {t(label)}
               </button>
             ))}
           </div>
@@ -54,29 +56,29 @@ export default function MyTripsPage() {
           {done ? (
             <div className="mt-6 text-center">
               <p className="text-sm text-ink/70">
-                We could not find a trip for <span className="font-semibold text-navy">{value}</span>.
+                {t("We could not find a trip for")} <span className="font-semibold text-navy">{value}</span>.
               </p>
               <p className="mt-2 text-sm text-ink/60">
-                Please check your details or call{" "}
-                <a href="tel:+18555550199" className="font-semibold text-navy">855-555-0199</a> for help.
+                {t("Please check your details or call")}{" "}
+                <a href="tel:+18555550199" className="font-semibold text-navy">855-555-0199</a> {t("for help.")}
               </p>
               <button onClick={() => setDone(false)} className="mt-4 text-sm font-semibold text-gold">
-                Try again
+                {t("Try again")}
               </button>
             </div>
           ) : (
             <form onSubmit={submit}>
               <p className="mt-5 text-center text-sm text-ink/70">
                 {tab === "email"
-                  ? "Enter the email you used to book your trip"
-                  : "Enter the ticket number from your confirmation"}
+                  ? t("Enter the email you used to book your trip")
+                  : t("Enter the ticket number from your confirmation")}
               </p>
               <input
                 type={tab === "email" ? "email" : "text"}
                 required
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder={tab === "email" ? "Email" : "Ticket number"}
+                placeholder={tab === "email" ? t("Email") : t("Ticket number")}
                 className="mt-3 w-full rounded-md border border-navy/15 px-3 py-2.5 text-sm text-navy outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
               <label className="mt-4 flex items-start gap-2 text-xs text-ink/60">
@@ -87,9 +89,9 @@ export default function MyTripsPage() {
                   className="mt-0.5 h-4 w-4 accent-navy"
                 />
                 <span>
-                  I have read and agree with AeroLux{" "}
-                  <Link href="/terms" className="underline hover:text-navy">Terms &amp; Conditions</Link> and{" "}
-                  <Link href="/privacy" className="underline hover:text-navy">Privacy Policy</Link>
+                  {t("I have read and agree with AeroLux")}{" "}
+                  <Link href="/terms" className="underline hover:text-navy">{t("Terms & Conditions")}</Link> {t("and")}{" "}
+                  <Link href="/privacy" className="underline hover:text-navy">{t("Privacy Policy")}</Link>
                 </span>
               </label>
               <button
@@ -97,7 +99,7 @@ export default function MyTripsPage() {
                 disabled={!agree || !value}
                 className="mt-5 w-full rounded-md bg-navy py-3 text-sm font-bold text-white transition hover:bg-navy-700 disabled:opacity-40"
               >
-                Continue
+                {t("Continue")}
               </button>
             </form>
           )}
@@ -105,7 +107,7 @@ export default function MyTripsPage() {
       </div>
 
       <p className="absolute inset-x-0 bottom-4 text-center text-xs text-white/80">
-        © {new Date().getFullYear()} AeroLux Travel LLC. All rights reserved
+        © {new Date().getFullYear()} AeroLux Travel LLC. {t("All rights reserved")}
       </p>
     </div>
   );

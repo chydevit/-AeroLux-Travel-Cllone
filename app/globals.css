@@ -8,10 +8,10 @@
   }
   body {
     @apply bg-white text-ink antialiased;
-    font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+    font-family: "Kantumruy Pro", "Noto Sans Khmer", system-ui, sans-serif;
   }
   h1, h2, h3 {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "Kantumruy Pro", "Noto Sans Khmer", system-ui, sans-serif;
   }
 }
 

@@ -20,8 +20,8 @@ module.exports = {
         mist: "#F6F8FC",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "Segoe UI", "sans-serif"],
-        serif: ["'Playfair Display'", "Georgia", "serif"],
+        sans: ["'Kantumruy Pro'", "'Noto Sans Khmer'", "system-ui", "sans-serif"],
+        serif: ["'Kantumruy Pro'", "'Noto Sans Khmer'", "system-ui", "sans-serif"],
       },
       boxShadow: {
         card: "0 10px 40px -12px rgba(10, 26, 51, 0.18)",

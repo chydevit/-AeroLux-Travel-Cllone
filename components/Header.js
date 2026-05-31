@@ -5,14 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks, contact } from "../lib/data";
 import { Phone, Chevron, Menu, Close } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Header() {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [lang, setLang] = useState("ENG");
   const pathname = usePathname();
   const isActive = (href) => pathname === href;
+  const { lang, setLang, t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-50">
@@ -22,11 +23,11 @@ export default function Header() {
           <div className="mx-auto flex w-full max-w-[1440px] items-center justify-center gap-3 px-4 py-2 text-center text-sm sm:px-6">
             <span className="hidden h-2 w-2 animate-pulse rounded-full bg-gold sm:inline-block" />
             <p className="font-medium">
-              Unlock exclusive savings on your next premium journey —{" "}
-              <span className="font-semibold text-white">limited weekly fares</span>
+              {t("Unlock exclusive savings on your next premium journey —")}{" "}
+              <span className="font-semibold text-white">{t("limited weekly fares")}</span>
             </p>
             <a href="#quote" className="rounded bg-gold px-3 py-1 text-xs font-bold text-navy hover:brightness-105">
-              SAVE NOW
+              {t("SAVE NOW")}
             </a>
             <button
               aria-label="Dismiss"
@@ -97,7 +98,7 @@ export default function Header() {
             </a>
 
             <a href="#quote" className="btn-gold hidden h-10 px-4 py-0 sm:inline-flex">
-              Get a Free Quote
+              {t("Get a Free Quote")}
             </a>
 
             {/* Mobile toggle */}
@@ -123,7 +124,7 @@ export default function Header() {
                         href={l.href}
                         className="whitespace-nowrap rounded border border-gold px-3 py-1.5 text-[13px] font-semibold uppercase tracking-wide text-gold transition hover:bg-gold hover:text-navy"
                       >
-                        {l.label}
+                        {t(l.label)}
                       </Link>
                     </li>
                   );
@@ -133,12 +134,14 @@ export default function Header() {
                     <Link
                       href={l.href}
                       className={`flex h-12 items-center whitespace-nowrap px-3 text-[13px] font-semibold uppercase tracking-wide transition ${
-                        active
-                          ? "bg-white/10 text-gold"
-                          : "text-white/80 hover:bg-white/10 hover:text-white"
+                        l.label === "Gift Vouchers"
+                          ? "text-gold hover:bg-white/10"
+                          : active
+                            ? "bg-white/10 text-gold"
+                            : "text-white/80 hover:bg-white/10 hover:text-white"
                       }`}
                     >
-                      {l.label}
+                      {t(l.label)}
                     </Link>
                   </li>
                 );
@@ -164,11 +167,11 @@ export default function Header() {
                   onClick={() => setMenuOpen(false)}
                   className={`border-b border-navy/5 py-3 text-sm font-medium ${pathname === l.href ? "text-gold" : "text-ink/80"}`}
                 >
-                  {l.label}
+                  {t(l.label)}
                 </Link>
               ))}
               <a href="#quote" className="btn-gold mt-3" onClick={() => setMenuOpen(false)}>
-                Get a Free Quote
+                {t("Get a Free Quote")}
               </a>
             </nav>
           </div>

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Star, Plane, Check } from "./icons";
+import { useLanguage } from "./LanguageProvider";
 
 export default function ReviewForm() {
+  const { t } = useLanguage();
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
   const [len, setLen] = useState(0);
@@ -19,7 +21,7 @@ export default function ReviewForm() {
           <div className="absolute inset-0 opacity-20 [background:radial-gradient(circle_at_30%_20%,#fff,transparent_45%)]" />
           <div className="absolute bottom-8 left-8 right-8 text-white">
             <Star className="h-10 w-10 text-gold" />
-            <p className="mt-3 font-serif text-2xl font-bold">Loved your trip? Tell the world.</p>
+            <p className="mt-3 font-serif text-2xl font-bold">{t("Loved your trip? Tell the world.")}</p>
           </div>
         </div>
 
@@ -30,14 +32,14 @@ export default function ReviewForm() {
               <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-gold text-navy">
                 <Check className="h-7 w-7" />
               </div>
-              <h3 className="font-serif text-2xl font-bold text-navy">Thanks for your review!</h3>
-              <p className="mt-2 text-sm text-ink/65">Your feedback has been submitted for moderation.</p>
+              <h3 className="font-serif text-2xl font-bold text-navy">{t("Thanks for your review!")}</h3>
+              <p className="mt-2 text-sm text-ink/65">{t("Your feedback has been submitted for moderation.")}</p>
             </div>
           ) : (
             <>
-              <h2 className="font-serif text-2xl font-bold text-navy">Review AeroLux Travel</h2>
+              <h2 className="font-serif text-2xl font-bold text-navy">{t("Review AeroLux Travel")}</h2>
               <div className="mt-4 flex items-center gap-2">
-                <span className="text-sm text-ink/70">Your rating:</span>
+                <span className="text-sm text-ink/70">{t("Your rating:")}</span>
                 <div className="flex gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button
@@ -57,17 +59,17 @@ export default function ReviewForm() {
 
               <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="mt-5 space-y-3">
                 <div className="grid grid-cols-2 gap-3">
-                  <input className={input} placeholder="Name*" required />
-                  <input type="email" className={input} placeholder="Email*" required />
+                  <input className={input} placeholder={t("Name*")} required />
+                  <input type="email" className={input} placeholder={t("Email*")} required />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
-                  <input className={input} placeholder="Departure City" />
-                  <input className={input} placeholder="Destination City" />
+                  <input className={input} placeholder={t("Departure City")} />
+                  <input className={input} placeholder={t("Destination City")} />
                 </div>
                 <div>
                   <textarea
                     className={input + " min-h-[120px] resize-y"}
-                    placeholder="Your review*"
+                    placeholder={t("Your review*")}
                     maxLength={1000}
                     required
                     onChange={(e) => setLen(e.target.value.length)}
@@ -75,7 +77,7 @@ export default function ReviewForm() {
                   <div className="mt-1 text-right text-xs text-ink/40">{len}/1000</div>
                 </div>
                 <button type="submit" className="btn-gold w-full py-3 text-base">
-                  <Plane className="h-5 w-5" /> Submit Review
+                  <Plane className="h-5 w-5" /> {t("Submit Review")}
                 </button>
               </form>
             </>

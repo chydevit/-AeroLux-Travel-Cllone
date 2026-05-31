@@ -4,6 +4,7 @@ import { useState } from "react";
 import PageHero from "../../components/PageHero";
 import { contact } from "../../lib/data";
 import { Phone, Check, Chevron, Headset } from "../../components/icons";
+import { useLanguage } from "../../components/LanguageProvider";
 
 const palettes = {
   silver: "from-[#dfe3e8] to-[#aab1bd] text-navy/80",
@@ -12,6 +13,7 @@ const palettes = {
 };
 
 function GiftCard({ tier, className = "" }) {
+  const { t } = useLanguage();
   return (
     <div
       className={`relative h-24 w-36 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br ${palettes[tier]} shadow-lift ring-1 ring-black/10 sm:h-28 sm:w-44 ${className}`}
@@ -21,7 +23,7 @@ function GiftCard({ tier, className = "" }) {
         <span className="font-serif text-lg font-extrabold tracking-tight">
           Aero<span className={tier === "onyx" ? "text-gold" : ""}>Lux</span>
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] opacity-70">Gift Card</span>
+        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] opacity-70">{t("Gift Card")}</span>
       </div>
     </div>
   );
@@ -38,12 +40,13 @@ function GiftCardFan() {
 }
 
 function CallToPurchase() {
+  const { t } = useLanguage();
   return (
     <a
       href={contact.phoneLink}
       className="inline-flex items-center gap-2 rounded-md bg-[#15795f] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-card transition hover:bg-[#11654f]"
     >
-      <Phone className="h-4 w-4" /> Call to Purchase {contact.phone}
+      <Phone className="h-4 w-4" /> {t("Call to Purchase")} {contact.phone}
     </a>
   );
 }
@@ -152,10 +155,11 @@ const faqs = [
 ];
 
 function ShowcaseBand({ heading }) {
+  const { t } = useLanguage();
   return (
     <section className="bg-mist py-14">
       <div className="container-x text-center">
-        <h2 className="section-title">{heading}</h2>
+        <h2 className="section-title">{t(heading)}</h2>
         <GiftCardFan />
         <div className="mt-4">
           <CallToPurchase />
@@ -166,6 +170,7 @@ function ShowcaseBand({ heading }) {
 }
 
 export default function GiftVouchersPage() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(0);
 
   return (
@@ -181,8 +186,8 @@ export default function GiftVouchersPage() {
       {/* Steps intro */}
       <section className="bg-white pt-14 text-center">
         <div className="container-x">
-          <h2 className="section-title">The AeroLux Gift Voucher &amp; Vacation Planner</h2>
-          <p className="mx-auto mt-3 max-w-xl text-ink/65">Follow these simple steps to purchase the perfect gift.</p>
+          <h2 className="section-title">{t("The AeroLux Gift Voucher & Vacation Planner")}</h2>
+          <p className="mx-auto mt-3 max-w-xl text-ink/65">{t("Follow these simple steps to purchase the perfect gift.")}</p>
         </div>
       </section>
 
@@ -195,8 +200,8 @@ export default function GiftVouchersPage() {
                 <span className="grid h-12 w-12 place-items-center rounded-lg bg-mist font-serif text-xl font-bold text-navy">
                   {i + 1}
                 </span>
-                <h3 className="mt-5 font-serif text-2xl font-bold text-navy">{s.title}</h3>
-                <p className="mt-3 max-w-md leading-relaxed text-ink/65">{s.text}</p>
+                <h3 className="mt-5 font-serif text-2xl font-bold text-navy">{t(s.title)}</h3>
+                <p className="mt-3 max-w-md leading-relaxed text-ink/65">{t(s.text)}</p>
               </div>
               <div className={i % 2 ? "md:order-1" : ""}>{s.visual}</div>
             </div>
@@ -209,7 +214,7 @@ export default function GiftVouchersPage() {
       {/* FAQ */}
       <section className="bg-white py-16">
         <div className="container-x max-w-3xl">
-          <h2 className="section-title mb-8">Frequently Asked Questions</h2>
+          <h2 className="section-title mb-8">{t("Frequently Asked Questions")}</h2>
           <div className="divide-y divide-navy/10 rounded-2xl border border-navy/10">
             {faqs.map((f, i) => {
               const isOpen = open === i;
@@ -220,12 +225,12 @@ export default function GiftVouchersPage() {
                     className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-base font-semibold text-navy">{f.q}</span>
+                    <span className="text-base font-semibold text-navy">{t(f.q)}</span>
                     <Chevron className={`h-5 w-5 shrink-0 text-gold transition-transform ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="overflow-hidden">
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-ink/65">{f.a}</p>
+                      <p className="px-5 pb-5 text-sm leading-relaxed text-ink/65">{t(f.a)}</p>
                     </div>
                   </div>
                 </div>
